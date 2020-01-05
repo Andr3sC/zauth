@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+DIR_KEYS=~/etc/claves/
+
+#FILE=`zenity --file-selection --filename=$DIR_KEYS --title="Select a Key File"`
+FILE=`yad --file --filename=$DIR_KEYS --text="Select a Key File" --undecorated`
+
+if [ "Q${FILE}Q" == "QQ" ]
+then
+  yad --text "No Key Selected" --undecorated --button=gtk-ok:1 --timeout=30 --timeout-indicator=top --mouse --on-top &
+else
+	KEYFILE=`basename $FILE`
+#zenity --info --text=$(oathtool --base32 --totp "`gpg -qd $FILE`" -d 6)
+#zenity --notification --text=$(oathtool --base32 --totp "`gpg -qd $FILE`" -d 6)
+	yad --text "OTP for [$KEYFILE]" --undecorated --button=gtk-ok:1 --timeout=30 --timeout-indicator=top --mouse --on-top --entry-text=$(oathtool --base32 --totp "`gpg -qd $FILE`" -d 6) --entry &
+fi
+
