@@ -1,5 +1,5 @@
 # zauth
-Yad wrapperd for oathtool
+Yad wrapper for oathtool
 
 Encrypt your OTP seed files with gpg and place them in a directory on your computer.
 
